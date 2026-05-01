@@ -1,5 +1,11 @@
 {
   "buildCommand": "bash install_flutter.sh && flutter/bin/flutter build web --release",
   "outputDirectory": "build/web",
-  "installCommand": "echo 'skip'"
+  "installCommand": "echo 'skip'",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
