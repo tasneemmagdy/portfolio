@@ -86,4 +86,5 @@ This project is built using Flutter Web with focus on:
 
 ---
 
+
 ⭐ If you like this project, feel free to star the repo!
