@@ -1,14 +1,7 @@
-import 'package:url_launcher/url_launcher.dart';
+import 'dart:html' as html;
 
 class LauncherHelper {
-  static Future<void> open(String url) async {
-    final uri = Uri.parse(url);
-
-    if (!await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception("Could not launch $url");
-    }
+  static void open(String url) {
+    html.window.open(url, "_blank");
   }
 }

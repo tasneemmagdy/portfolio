@@ -7,23 +7,23 @@ class CvButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () {
-        LauncherHelper.open(AppLinks.cv);
-      },
-      icon: const Icon(Icons.visibility),
-      label: const Text("View CV"),
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 14,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            LauncherHelper.open(AppLinks.cv);
+          },
+          child: const Text("View CV"),
         ),
-        backgroundColor: const Color(0xff4F8CFF),
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        const SizedBox(width: 12),
+        ElevatedButton(
+          onPressed: () {
+            LauncherHelper.open(AppLinks.cv);
+          },
+          child: const Text("Download CV"),
         ),
-      ),
+      ],
     );
   }
 }
