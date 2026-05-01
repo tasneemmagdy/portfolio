@@ -11,6 +11,6 @@ class AppLinks {
       "tel:01203413430";
 
   static const String cv =
-      "https://drive.google.com/file/d/1H6HFnwRDzLQMavFf8UpsQMT-bYDXZ0AO/view?usp=drive_link";
+      "https://drive.google.com/file/d/1-CKORAq-8c3roVoP9X06lnyE7TQ97Haf/view?usp=drive_link";
       
 }
