@@ -8,5 +8,5 @@ class AppLinks {
 
   static const String phone = "tel:01203413430";
 
-  static const String cv = "assets/cv/tasneemmagdyresume.pdf";
+  static const String cv = "https://portfolio-five-beta-xddxrggsa4.vercel.app/assets/cv/tasneemmagdyresume.pdf";
 }
