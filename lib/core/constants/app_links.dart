@@ -8,5 +8,5 @@ class AppLinks {
 
   static const String phone = "tel:01203413430";
 
-  static const String cv = "assets/cv/tasneem_cv.pdf";
+  static const String cv = "assets/cv/tasneemmagdyresume.pdf";
 }
