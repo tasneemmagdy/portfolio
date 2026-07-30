@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
 
 class AppTextStyles {
-  static const heading1 = TextStyle(
-    fontSize: 34,
-    fontWeight: FontWeight.bold,
-    color: AppColors.textPrimary,
-  );
+  static TextStyle heading1(BuildContext context) {
+    return Theme.of(context).textTheme.displayMedium!.copyWith(
+          fontSize: 38,
+          fontWeight: FontWeight.bold,
+        );
+  }
 
-  static const heading2 = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
-  );
+  static TextStyle heading2(BuildContext context) {
+    return Theme.of(context).textTheme.headlineMedium!.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+        );
+  }
 
-  static const body = TextStyle(
-    fontSize: 16,
-    color: AppColors.textSecondary,
-    height: 1.5,
-  );
+  static TextStyle body(BuildContext context) {
+    return Theme.of(context).textTheme.bodyLarge!.copyWith(
+          fontSize: 16,
+          height: 1.7,
+        );
+  }
 
-  static const small = TextStyle(
-    fontSize: 13,
-    color: AppColors.textMuted,
-  );
+  static TextStyle small(BuildContext context) {
+    return Theme.of(context).textTheme.bodySmall!.copyWith(
+          fontSize: 13,
+        );
+  }
 }

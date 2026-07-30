@@ -1,87 +1,105 @@
 import 'package:flutter/material.dart';
-import '../widgets/project_card.dart';
+import 'package:portfolio_web/core/utils/responsive.dart';
+import 'package:portfolio_web/features/home/data/projects_data.dart';
+import 'package:portfolio_web/features/home/presentation/widgets/project_card.dart';
 
-class ProjectsSection extends StatelessWidget {
+class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
 
   @override
+  State<ProjectsSection> createState() => _ProjectsSectionState();
+}
+
+class _ProjectsSectionState extends State<ProjectsSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> fadeAnimation;
+  late Animation<Offset> slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
+
+    fadeAnimation = CurvedAnimation(parent: controller, curve: Curves.easeOut);
+
+    slideAnimation = Tween<Offset>(
+      begin: const Offset(0, .15),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
+
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final hPadding = Responsive.horizontalPadding(context);
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Projects",
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+      padding: EdgeInsets.symmetric(
+        horizontal: hPadding,
+        vertical: Responsive.sectionVerticalPadding(context),
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1250),
+          child: FadeTransition(
+            opacity: fadeAnimation,
+            child: SlideTransition(
+              position: slideAnimation,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Projects",
+                    style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "A selection of production and personal Flutter projects demonstrating clean architecture, responsive UI, state management, and scalable application development.",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 16,
+                      height: 1.7,
+                    ),
+                  ),
+                  const SizedBox(height: 45),
+                  Wrap(
+                    spacing: 28,
+                    runSpacing: 28,
+                    alignment: WrapAlignment.center,
+                    children: projects
+                        .map(
+                          (project) => ProjectCard(
+                            title: project.title,
+                            description: project.description,
+                            problem: project.problem,
+                            solution: project.solution,
+                            features: project.features,
+                            technologies: project.technologies,
+                            images: project.images,
+                            github: project.github,
+                            demo: project.demo,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
             ),
           ),
-
-          const SizedBox(height: 20),
-
-          Wrap(
-            spacing: 20,
-            runSpacing: 20,
-            children: const [
-
-              // 🛒 1. E-COMMERCE
-              ProjectCard(
-                title: "E-Commerce App (Shop App)",
-                problem:
-                    "Modern users expect a fast, seamless, and secure shopping experience across mobile platforms, but many apps fail to deliver smooth UX and real-time performance.",
-                solution:
-                    "Built a scalable production-ready e-commerce app using Flutter with Clean Architecture and Bloc, ensuring maintainability, performance, and smooth user experience.",
-                features:
-                    "Authentication (Google & Email)\nProduct catalog\nCart system with real-time updates\nCheckout flow\nOrder tracking\nResponsive UI across Android & iOS",
-                tech:
-                    "Flutter • Firebase • Bloc • REST API • Clean Architecture",
-              ),
-
-              // 📱 2. SOCIAL APP (MINIGRAM)
-              ProjectCard(
-                title: "Minigram (Social Media App)",
-                problem:
-                    "Users need a fast and interactive social platform with real-time updates and smooth engagement features.",
-                solution:
-                    "Developed a real-time social media application using Firebase and Flutter with Cubit state management for scalable performance.",
-                features:
-                    "Real-time posts\nLikes & comments\nUser profiles\nImage sharing\nLive updates using streams",
-                tech:
-                    "Flutter • Firebase • Cubit • Streams",
-              ),
-
-              // 📊 3. DASHBOARD
-              ProjectCard(
-                title: "Analytics Dashboard (Time Series App)",
-                problem:
-                    "Businesses need clear visualization of complex data to make informed decisions.",
-                solution:
-                    "Built a dynamic dashboard that transforms raw data into meaningful insights using interactive charts and clean UI design.",
-                features:
-                    "Time-series charts\nData visualization\nAPI integration\nInteractive analytics\nResponsive dashboard layout",
-                tech:
-                    "Flutter • Charts • REST API • State Management",
-              ),
-
-              // ✅ 4. TASKFLOW
-              ProjectCard(
-                title: "TaskFlow (Productivity App)",
-                problem:
-                    "Users struggle with organizing tasks efficiently across devices with offline support.",
-                solution:
-                    "Built an offline-first task management app using Hive and Clean Architecture for high performance and reliability.",
-                features:
-                    "Task creation & management\nOffline storage\nPriority system\nClean UI\nFast local database (Hive)",
-                tech:
-                    "Flutter • Hive • Clean Architecture • GetX",
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
