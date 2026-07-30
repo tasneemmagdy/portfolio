@@ -83,9 +83,7 @@ class ContactSection extends StatelessWidget {
               Center(
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    LauncherHelper.open(
-                      "assets/cv/TasneemMagdy_Resume.pdf",
-                    );
+                    LauncherHelper.open("assets/assets/cv/TasneemMagdy_Resume.pdf");
                   },
                   icon: const Icon(Icons.download),
                   label: const Text("Download Resume"),
